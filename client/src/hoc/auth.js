@@ -4,6 +4,9 @@ import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Auth(SpecificComponent, option, adminRoute = null) {
+  //option의 상태에 따라 public private를 나누고 접근 권한을 분리한다.
+  //option true 이면 로그인한 유저만 접근가능
+  //option false 이면
   function AuthenticationCheck(props) {
     let user = useSelector((state) => state.user);
     const dispatch = useDispatch();

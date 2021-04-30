@@ -27,7 +27,7 @@ function LoginPage(props) {
   return (
     <Formik
       initialValues={{
-        email: initialEmail,
+        email: '',
         password: '',
       }}
       validationSchema={Yup.object().shape({
@@ -144,20 +144,6 @@ function LoginPage(props) {
               )}
 
               <Form.Item>
-                <Checkbox
-                  id="rememberMe"
-                  onChange={handleRememberMe}
-                  checked={rememberMe}
-                >
-                  Remember me
-                </Checkbox>
-                <a
-                  className="login-form-forgot"
-                  href="/reset_user"
-                  style={{ float: 'right' }}
-                >
-                  forgot password
-                </a>
                 <div>
                   <Button
                     type="primary"

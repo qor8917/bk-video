@@ -4,11 +4,12 @@ import Meta from 'antd/lib/card/Meta';
 import axios from 'axios';
 import Avatar from 'antd/lib/avatar/avatar';
 import moment from 'moment';
-function LandingPage() {
+function SubscriptionPage() {
   const { Title } = Typography;
   const [Video, setVideo] = useState([]);
   useEffect(() => {
-    axios.get('/api/video/getVideos').then((r) => {
+    let variables = { userFrom: localStorage.getItem('userId') };
+    axios.post('/api/video/getSubscriptionVideo', variables).then((r) => {
       if (r.data.success) {
         setVideo(r.data.videos);
       } else {
@@ -52,11 +53,11 @@ function LandingPage() {
 
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>
-      <Title level={2}>Recomended</Title>
+      <Title level={2}>Subscription</Title>
       <hr />
       <Row gutter={[32, 16]}>{renderCards}</Row>
     </div>
   );
 }
 
-export default LandingPage;
+export default SubscriptionPage;
