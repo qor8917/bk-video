@@ -1,12 +1,15 @@
+import { Button, Input } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-function Comment({ postId }) {
-  const videoId = postId;
+import ReplyComment from './ReplyComment';
+import SingleComment from './SingleComment';
+const { TextArea } = Input;
+function Comment({ postId, Comments, refreshFuntion }) {
   const user = useSelector((state) => state.user);
   const [commentValue, setCommentValue] = useState('');
   const onChange = (e) => {
-    setCommentValue(e.currentTarget.value);
+    setCommentValue(e.target.value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,11 +17,13 @@ function Comment({ postId }) {
     const variables = {
       content: commentValue,
       writer: user.userData._id,
-      postId: videoId,
+      postId,
     };
     axios.post('/api/comment/saveComment', variables).then((r) => {
       if (r.data.success) {
         console.log(r.data.result);
+        refreshFuntion(r.data.result);
+        setCommentValue('');
       } else {
         alert('커멘트를 저장하지 못했습니다.');
       }
@@ -31,20 +36,39 @@ function Comment({ postId }) {
       <p>Replies</p>
       <hr />
       {/* Comment Lists */}
-
+      {Comments &&
+        Comments.map(
+          (comment, index) =>
+            !comment.responseTo && (
+              <>
+                <SingleComment
+                  key={index}
+                  postId={postId}
+                  comment={comment}
+                  refreshFuntion={refreshFuntion}
+                />
+                <ReplyComment
+                  Comments={Comments}
+                  refreshFuntion={refreshFuntion}
+                  postId={postId}
+                  parentCommentId={comment._id}
+                />
+              </>
+            )
+        )}
       {/* Root Comment Form */}
 
       <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-        <textarea
+        <TextArea
           style={{ width: '100%', borderRadius: '5px' }}
           onChange={onChange}
           value={commentValue}
           placeholder="코멘트를 작성해 주세요."
-        ></textarea>
+        ></TextArea>
         <br />
-        <button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>
+        <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );

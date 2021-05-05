@@ -6,16 +6,30 @@ import Subscribe from './Sections/Subscribe';
 import Comment from './Sections/Comment';
 
 function VideoDetailPage(props) {
-  const videoId = props.match.params.videoId;
-  const variable = { videoId: videoId };
+  const postId = props.match.params.postId;
+  const variable = { videoId: postId };
 
   const [VideoDetail, setVideoDetail] = useState([]);
+  const [Comments, setComments] = useState([]);
+
+  const refreshFuntion = (newComment) => {
+    setComments(Comments.concat(newComment));
+  };
+
   useEffect(() => {
     axios.post('/api/video/getVideoDetail', variable).then((r) => {
       if (r.data.success) {
         setVideoDetail(r.data.videoDetail);
       } else {
         alert('비디오 정보를 가져오기를 실패 했습니다.');
+      }
+    });
+
+    axios.post('/api/comment/getComments', variable).then((r) => {
+      if (r.data.success) {
+        setComments(r.data.comments);
+      } else {
+        alert('코멘트 정보를 가져오기를 실패 했습니다.');
       }
     });
   }, []);
@@ -46,7 +60,11 @@ function VideoDetailPage(props) {
               />
             </List.Item>
             {/* comments */}
-            <Comment postId={videoId} />
+            <Comment
+              Comments={Comments}
+              postId={postId}
+              refreshFuntion={refreshFuntion}
+            />
           </div>
         </Col>
         <Col lg={6} xs={24}>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "antd": "^4.15.0",
     "axios": "^0.21.1",
     "core-js": "^3.10.0",
@@ -44,7 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@ant-design/icons": "^4.6.2",
+    
     "http-proxy-middleware": "^1.1.0"
   }
 }
