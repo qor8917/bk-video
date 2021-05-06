@@ -2,6 +2,7 @@ import { Avatar, Button, Comment, Input } from 'antd';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import LikeDislikes from './LikeDislikes';
 const { TextArea } = Input;
 function SingleComment({ postId, comment, refreshFuntion }) {
   const user = useSelector((state) => state.user);
@@ -37,6 +38,10 @@ function SingleComment({ postId, comment, refreshFuntion }) {
   };
 
   const actions = [
+    <LikeDislikes
+      userId={localStorage.getItem('userID')}
+      commentId={comment._id}
+    />,
     <span onClick={onClickReplyOpen} key="comment-basic-replay-to">
       Reply to
     </span>,

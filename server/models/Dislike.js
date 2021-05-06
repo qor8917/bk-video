@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const subscriberSchema = mongoose.Schema(
+const dislikeSchema = mongoose.Schema(
   {
-    userTo: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    userFrom: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
+    commentId: { type: Schema.Types.ObjectId, ref: 'Comment' },
+    videoId: { type: Schema.Types.ObjectId, ref: 'Video' },
   },
   { timestamp: true }
 );
-const Subscribe = mongoose.model('Subscribe', subscriberSchema);
+const Dislike = mongoose.model('Dislike', dislikeSchema);
 
-module.exports = { Subscribe };
+module.exports = { Dislike };
