@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import ReplyComment from './ReplyComment';
 import SingleComment from './SingleComment';
 const { TextArea } = Input;
-function Comment({ postId, Comments, refreshFuntion }) {
+function Comment({ postId, Comments, refreshFuntion, history }) {
   const user = useSelector((state) => state.user);
   const [commentValue, setCommentValue] = useState('');
   const onChange = (e) => {
@@ -46,12 +46,14 @@ function Comment({ postId, Comments, refreshFuntion }) {
                   postId={postId}
                   comment={comment}
                   refreshFuntion={refreshFuntion}
+                  history={history}
                 />
                 <ReplyComment
                   Comments={Comments}
                   refreshFuntion={refreshFuntion}
                   postId={postId}
                   parentCommentId={comment._id}
+                  history={history}
                 />
               </>
             )

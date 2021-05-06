@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import LikeDislikes from './LikeDislikes';
 const { TextArea } = Input;
-function SingleComment({ postId, comment, refreshFuntion }) {
+function SingleComment({ postId, comment, refreshFuntion, history }) {
   const user = useSelector((state) => state.user);
   const [OpenReply, setOpenReply] = useState(false);
   const [CommentValue, setCommentValue] = useState('');
@@ -39,8 +39,9 @@ function SingleComment({ postId, comment, refreshFuntion }) {
 
   const actions = [
     <LikeDislikes
-      userId={localStorage.getItem('userID')}
+      userId={localStorage.getItem('userId')}
       commentId={comment._id}
+      history={history}
     />,
     <span onClick={onClickReplyOpen} key="comment-basic-replay-to">
       Reply to

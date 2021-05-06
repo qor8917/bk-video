@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-function Subscriber({ userTo }) {
+function Subscriber({ userTo, history }) {
   const [SubscriberNumber, setSubscriberNumber] = useState(0);
   const [Subscribed, setSubscribed] = useState(false);
 
@@ -31,33 +31,41 @@ function Subscriber({ userTo }) {
   }, []);
 
   const onSubscribe = () => {
-    let subscribedvariables = {
-      userTo,
-      userFrom: localStorage.getItem('userId'),
-    };
+    if (localStorage.getItem('userId')) {
+      //로그인 되어 있지 않다면
+      let subscribedvariables = {
+        userTo,
+        userFrom: localStorage.getItem('userId'),
+      };
 
-    if (Subscribed) {
-      //이미 구독중이라면
-      axios
-        .post('/api/subscribe/unSubscribe', subscribedvariables)
-        .then((r) => {
-          if (r.data.success) {
-            setSubscriberNumber(SubscriberNumber - 1);
-            setSubscribed(!Subscribed);
-          } else {
-            alert('구독취소를 실패했습니다.');
-          }
-        });
+      if (Subscribed) {
+        //이미 구독중이라면
+        axios
+          .post('/api/subscribe/unSubscribe', subscribedvariables)
+          .then((r) => {
+            if (r.data.success) {
+              setSubscriberNumber(SubscriberNumber - 1);
+              setSubscribed(!Subscribed);
+            } else {
+              alert('구독취소를 실패했습니다.');
+            }
+          });
+      } else {
+        //미구독 중이라면
+        axios
+          .post('/api/subscribe/subscribe', subscribedvariables)
+          .then((r) => {
+            if (r.data.success) {
+              setSubscriberNumber(SubscriberNumber + 1);
+              setSubscribed(!Subscribed);
+            } else {
+              alert('구독하는데 실패했습니다.');
+            }
+          });
+      }
     } else {
-      //미구독 중이라면
-      axios.post('/api/subscribe/subscribe', subscribedvariables).then((r) => {
-        if (r.data.success) {
-          setSubscriberNumber(SubscriberNumber + 1);
-          setSubscribed(!Subscribed);
-        } else {
-          alert('구독하는데 실패했습니다.');
-        }
-      });
+      alert('로그인 하세요');
+      history.push('/login');
     }
   };
 

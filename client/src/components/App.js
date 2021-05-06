@@ -11,7 +11,7 @@ import NavBar from './views/NavBar/NavBar';
 import Footer from './views/Footer/Footer';
 import VideoDetailPage from './views/VideoDetailPage/VideoDetailPage';
 import SubscriptionPage from './views/SubscriptionPage/SubscriptionPage';
-
+import Subscribe from './views/VideoDetailPage/Sections/Subscribe';
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
@@ -20,6 +20,7 @@ function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
+
       <div
         style={{
           paddingTop: '69px',

@@ -34,9 +34,9 @@ router.post('/getDislikes', (req, res) => {
 router.post('/upLike', (req, res) => {
   let variables = {};
   if (req.body.postId) {
-    variables = { videoId: req.body.postId };
+    variables = { videoId: req.body.postId, userId: req.body.userId };
   } else {
-    variables = { commentId: req.body.commentId };
+    variables = { commentId: req.body.commentId, userId: req.body.userId };
   }
   //Like db에 클릭 정보를 넣는다
   const like = new Like(variables);
@@ -52,9 +52,9 @@ router.post('/upLike', (req, res) => {
 router.post('/unLike', (req, res) => {
   let variables = {};
   if (req.body.postId) {
-    variables = { videoId: req.body.postId };
+    variables = { videoId: req.body.postId, userId: req.body.userId };
   } else {
-    variables = { commentId: req.body.commentId };
+    variables = { commentId: req.body.commentId, userId: req.body.userId };
   }
   //라이크의 정보를 db에서 삭제
   Like.findOneAndDelete(variables).exec((err, likeResult) => {
@@ -66,9 +66,9 @@ router.post('/unLike', (req, res) => {
 router.post('/unDislke', (req, res) => {
   let variables = {};
   if (req.body.postId) {
-    variables = { videoId: req.body.postId };
+    variables = { videoId: req.body.postId, userId: req.body.userId };
   } else {
-    variables = { commentId: req.body.commentId };
+    variables = { commentId: req.body.commentId, userId: req.body.userId };
   }
   //싫어요를 취소
   Dislike.findOneAndDelete(variables).exec((err, likeResult) => {
@@ -80,9 +80,9 @@ router.post('/unDislke', (req, res) => {
 router.post('/dislike', (req, res) => {
   let variables = {};
   if (req.body.postId) {
-    variables = { videoId: req.body.postId };
+    variables = { videoId: req.body.postId, userId: req.body.userId };
   } else {
-    variables = { commentId: req.body.commentId };
+    variables = { commentId: req.body.commentId, userId: req.body.userId };
   }
   //Dislike db에 클릭 정보를 넣는다
   const dislike = new Dislike(variables);
