@@ -47,32 +47,33 @@ function VideoUploadPage(props) {
     setCategory(value);
   };
   const onDrop = (files) => {
-    //ajax를 통해 이미지 업로드
     let formData = new FormData();
-    formData.append('file', files[0]);
     const config = {
       header: { 'content-type': 'multipart/form-data' },
     };
+    console.log(files);
+    formData.append('file', files[0]);
 
-    axios.post('/api/video/uploadfiles', formData, config).then((r) => {
-      if (r.data.success) {
-        let variables = {
-          url: r.data.url,
-          fileName: r.data.fileName,
+    axios.post('/api/video/uploadfiles', formData, config).then((response) => {
+      if (response.data.success) {
+        let variable = {
+          filePath: response.data.url,
+          fileName: response.data.fileName,
         };
+        setFilePath(response.data.filePath);
 
-        setFilePath(r.data.url);
+        //gerenate thumbnail with this filepath !
 
-        axios.post('/api/video/thumbnail', variables).then((r) => {
-          if (r.data.success) {
-            setDuration(r.data.fileDuration);
-            setthunmbnaliPath(r.data.url);
+        axios.post('/api/video/thumbnail', variable).then((response) => {
+          if (response.data.success) {
+            setDuration(response.data.fileDuration);
+            setthunmbnaliPath(response.data.thumbsFilePath);
           } else {
-            alert('썸네일 생성에 실패 했습니다.');
+            alert('Failed to make the thumbnails');
           }
         });
       } else {
-        alert('비디오 업로드를 실패 했습니다.');
+        alert('failed to save the video in server');
       }
     });
   };
