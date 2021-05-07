@@ -131,7 +131,7 @@ function VideoUploadPage(props) {
           {thunmbnaliPath && (
             <div>
               <img
-                src={`http://localhost:5000/${thunmbnaliPath}`}
+                src={`http://3.35.64.50:5000/${thunmbnaliPath}`}
                 alt="thumbNail"
               />
             </div>

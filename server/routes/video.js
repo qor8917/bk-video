@@ -90,17 +90,17 @@ router.post('/uploadfiles', (req, res) => {
   });
 });
 router.post('/thumbnail', (req, res) => {
-  //썸네일 생성하고 비디오 러닝타임도 가져오기
   let thumbsFilePath = '';
   let fileDuration = '';
 
-  ffmpeg.ffprobe(req.body.url, function (err, metadata) {
+  ffmpeg.ffprobe(req.body.filePath, function (err, metadata) {
     console.dir(metadata);
     console.log(metadata.format.duration);
+
     fileDuration = metadata.format.duration;
   });
 
-  ffmpeg(req.body.url)
+  ffmpeg(req.body.filePath)
     .on('filenames', function (filenames) {
       console.log('Will generate ' + filenames.join(', '));
       thumbsFilePath = 'uploads/thumbnails/' + filenames[0];
@@ -109,13 +109,9 @@ router.post('/thumbnail', (req, res) => {
       console.log('Screenshots taken');
       return res.json({
         success: true,
-        url: thumbsFilePath,
+        thumbsFilePath: thumbsFilePath,
         fileDuration: fileDuration,
       });
-    })
-    .on('error', function (err) {
-      console.log(err);
-      return res.json({ success: false, err });
     })
     .screenshots({
       // Will take screens at 20%, 40%, 60% and 80% of the video
