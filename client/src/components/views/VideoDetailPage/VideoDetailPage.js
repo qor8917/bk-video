@@ -12,7 +12,7 @@ function VideoDetailPage(props) {
 
   const [VideoDetail, setVideoDetail] = useState([]);
   const [Comments, setComments] = useState([]);
-
+  console.log(VideoDetail);
   const refreshFuntion = (newComment) => {
     setComments(Comments.concat(newComment));
   };
@@ -46,7 +46,7 @@ function VideoDetailPage(props) {
           <div style={{ width: '100%', padding: '3rem' }}>
             <video
               style={{ width: '100%' }}
-              src={`http://3.35.64.50:5000/${VideoDetail.filePath}`}
+              src={`http://localhost:5000/${VideoDetail.filePath}`}
               controls
             />
             <List.Item

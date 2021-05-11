@@ -26,7 +26,7 @@ function LandingPage() {
           <div style={{ position: 'relative' }}>
             <img
               style={{ width: '100%' }}
-              src={`http://3.35.64.50:5000/${video.thumbnail}`}
+              src={`http://localhost:5000/${video.thumbnail}`}
               alt=""
             />
             <div className="duration">

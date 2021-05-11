@@ -13,10 +13,7 @@ function Footer() {
         fontSize: '1rem',
       }}
     >
-      <p>
-        {' '}
-        merman <Icon type="smile" />
-      </p>
+      <p> Copyright © merman. All rights reserved.</p>
     </div>
   );
 }

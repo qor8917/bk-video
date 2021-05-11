@@ -60,7 +60,7 @@ function VideoUploadPage(props) {
           filePath: response.data.url,
           fileName: response.data.fileName,
         };
-        setFilePath(response.data.filePath);
+        setFilePath(response.data.url);
 
         //gerenate thumbnail with this filepath !
 
@@ -132,7 +132,7 @@ function VideoUploadPage(props) {
           {thunmbnaliPath && (
             <div>
               <img
-                src={`http://3.35.64.50:5000/${thunmbnaliPath}`}
+                src={`http://localhost:5000/${thunmbnaliPath}`}
                 alt="thumbNail"
               />
             </div>
