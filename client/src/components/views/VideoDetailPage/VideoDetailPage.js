@@ -41,13 +41,14 @@ function VideoDetailPage(props) {
       <Subscribe userTo={VideoDetail.writer._id} history={props.history} />
     );
     return (
-      <Row gutter={[16, 16]}>
+      <Row>
         <Col lg={18} xs={24}>
           <div style={{ width: '100%', padding: '3rem' }}>
             <video
               style={{ width: '100%' }}
-              src={`http://localhost:5000/${VideoDetail.filePath}`}
+              src={`http://3.35.221.170:5000/${VideoDetail.filePath}`}
               controls
+              preload
             />
             <List.Item
               actions={[

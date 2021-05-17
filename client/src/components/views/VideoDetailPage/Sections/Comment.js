@@ -60,7 +60,7 @@ function Comment({ postId, Comments, refreshFuntion, history }) {
         )}
       {/* Root Comment Form */}
 
-      <form style={{ display: 'flex' }} onSubmit={onSubmit}>
+      <form style={{ display: 'flex', marginTop: '1em' }} onSubmit={onSubmit}>
         <TextArea
           style={{ width: '100%', borderRadius: '5px' }}
           onChange={onChange}

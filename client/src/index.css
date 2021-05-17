@@ -54,3 +54,16 @@ input.error {
   font-weight: 500;
   line-height: 12px;
 }
+
+@media only screen and (max-width: 1023px) {  
+  .side{padding: 0 3rem;}
+  .side-wrap{margin-top: 1rem !important}
+}
+
+@media only screen and (max-width: 576px) {
+  .ant-list-item{display: block;}
+  .ant-list-item-meta{width: 100%;}
+  .ant-list-item-action{width: 100%;margin-left: 0 !important;}
+  .ant-list-item-action>li{display: block !important;text-align: left !important;margin: 1em 0 !important;padding: 0 !important;}
+  
+}

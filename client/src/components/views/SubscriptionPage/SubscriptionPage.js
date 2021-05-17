@@ -27,7 +27,7 @@ function SubscriptionPage() {
           <div style={{ position: 'relative' }}>
             <img
               style={{ width: '100%' }}
-              src={`http://localhost:5000/${video.thumbnail}`}
+              src={`http://3.35.221.170:5000/${video.thumbnail}`}
               alt=""
             />
             <div className="duration">

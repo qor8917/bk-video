@@ -2,7 +2,6 @@
 import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
-import { USER_SERVER } from '../../../Config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +9,7 @@ function RightMenu(props) {
   const user = useSelector((state) => state.user);
 
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then((response) => {
+    axios.get('/api/users/logout').then((response) => {
       if (response.status === 200) {
         props.history.push('/login');
       } else {
@@ -34,7 +33,7 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="video">
-          <a href="/video/upload">Video</a>
+          <a href="/video/upload">Upload Video</a>
         </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>

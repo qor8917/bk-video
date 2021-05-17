@@ -70,7 +70,7 @@ function Subscriber({ userTo, history }) {
   };
 
   return (
-    <div>
+    <div className="btn_subs">
       <button
         style={{
           backgroundColor: `${Subscribed ? '#cccccc' : '#cc0000'}`,
